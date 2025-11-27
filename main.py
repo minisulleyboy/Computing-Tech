@@ -1,9 +1,16 @@
 import random
 import time
 running = True
-    
 
-print('Welcome to Times Tables Tutoring!')
+if open('names.txt', 'r').read() == '':
+    name = input('Enter your name: ')
+    with open('names.txt', 'a') as f:
+        f.write(name + '\n')
+if open('names.txt', 'r').read() != '':
+    with open('names.txt', 'r') as f:
+        names = f.readlines()
+        name = names[-1].strip()
+    print(f'Welcome, {name} to Times Tables Tutoring!')
 print('1. Start Practice')
 print('2. View instructions')
 print('3. View Previous Scores')
@@ -57,16 +64,48 @@ while running:
                 print('Invalid input. Please enter a number.')
                 qcount += 1
             print(f'You scored {score} out of {qcount}.')
-            retype = True
+            save_option_running = True
+            while save_option_running:
+                save_option = input('Would you like to save your score? (yes/no): ')
+                if save_option.lower() == 'yes':
+                    with open('scores.txt', 'a') as f:
+                        f.write(f'Difficulty: {difficulty}, Score: {score} out of {qcount}\n')
+                    print('Score saved successfully.')
+                    time.sleep(2)
+                    save_option_running = False
+                    retype = True
+                elif save_option.lower() == 'no':
+                    print('Score not saved.')
+                    time.sleep(2)
+                    save_option_running = False
+                    retype = True
+                else:
+                    print('Invalid input. Please enter yes or no.')
         elif start_choice == 2:
             print('Instructions:')
             print('1. Choose a difficulty level: Easy, Medium, or Hard.')
             print('2. You will be asked a series of multiplication questions based on the chosen difficulty.')
             print('3. You have 60 seconds to answer as many questions as possible.')
             print('4. Your score will be displayed at the end of the practice session.')
+            time.sleep(5)
+            retype = True
+        elif start_choice == 3:
+            print('Previous Scores:')
+            try:
+                with open('scores.txt', 'r') as f:
+                    scores = f.readlines()
+                    if scores:
+                        for line in scores:
+                            print(line.strip())
+                    else:
+                        print('No previous scores found.')
+            except FileNotFoundError:
+                print('No previous scores found.')
+            time.sleep(5)
             retype = True
         elif start_choice == 4:
-            print('Exiting the program. Goodbye!')
+            print(f'Exiting the program. Goodbye {name}!')
+            retype = False
             running = False
         if retype:
             print('Welcome to Times Tables Tutoring!')

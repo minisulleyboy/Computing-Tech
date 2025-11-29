@@ -40,8 +40,9 @@ while running:
             time_limit = 60
             elapsed_time = time.time() - start_time
             
-            try:
-                while elapsed_time < time_limit:
+            
+            while elapsed_time < time_limit:
+                try:
                     elapsed_time = time.time() - start_time
                     if elapsed_time < time_limit:
                             print(f'Time remaining: {int(time_limit - elapsed_time)} seconds')
@@ -60,9 +61,9 @@ while running:
                         print(f'Incorrect. The correct answer is {num1 * num2}.')
                         qcount += 1
                         
-            except ValueError:
-                print('Invalid input. Please enter a number.')
-                qcount += 1
+                except ValueError:
+                    print('Invalid input. Please enter a number.')
+                    qcount += 1
             print(f'You scored {score} out of {qcount}.')
             save_option_running = True
             while save_option_running:

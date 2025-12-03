@@ -119,14 +119,14 @@ def main():
         choice = input('Enter your choice (1-4): ')
         if choice == '1':
             difficulty, max_num = select_difficulty()
-            score, qcount = start_practice(difficulty, max_num)
+            score, qcount = start_practice(max_num)
             save_score(difficulty, score, qcount)
         elif choice == '2':
             show_instructions()
         elif choice == '3':
             show_previous_scores()
         elif choice == '4':
-            print('Exiting the program. Goodbye!')
+            print(f'Exiting the program. Goodbye {name}!')
             running = False
         else:
             print('Invalid choice. Please enter a number between 1 and 4.')

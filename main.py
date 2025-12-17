@@ -1,5 +1,6 @@
 import random
 import time
+import datetime
 running = True
 
 
@@ -77,8 +78,10 @@ def save_score(difficulty, score, qcount):
     while save_option_running:
         save_option = input('Would you like to save your score? (yes/no): ')
         if save_option.lower() == 'yes':
+            date = datetime.date.today()
+            date_string = date.strftime('%d-%m-%Y')
             with open('scores.txt', 'a') as f:
-                f.write(f'Difficulty: {difficulty}, Score: {score} out of {qcount}\n')
+                f.write(f'Difficulty: {difficulty}, Score: {score} out of {qcount} Date: {date_string}\n')
             print('Score saved successfully.')
             time.sleep(2)
             save_option_running = False

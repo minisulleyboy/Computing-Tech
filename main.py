@@ -21,11 +21,13 @@ def showmenu():
         name = input('Enter your name: ')
         with open('names.txt', 'a') as f:
             f.write(f'{name}\n')
+    print()
     print(f'Welcome {name} to Times Tables Tutoring!')
     print('1. Start Practice')
     print('2. View instructions')
     print('3. View Previous Scores')
-    print('4. Exit')
+    print('4. Change Name')
+    print('5. Exit')
 
 def select_difficulty():
     difficulty = input('Select difficulty Easy, Medium, or Hard: ')
@@ -114,12 +116,18 @@ def show_previous_scores():
         print('No previous scores found.')
     time.sleep(5)
 
+def change_name():
+    new_name = input('Enter your new name: ')
+    with open('names.txt', 'a') as f:
+        f.write(f'{new_name}\n')
+    print(f'Name changed successfully to {new_name}.')
+    time.sleep(2)
+
 def main():
-    name = load_or_create_name()
     running = True
     showmenu()
     while running:
-        choice = input('Enter your choice (1-4): ')
+        choice = input('Enter your choice (1-5): ')
         if choice == '1':
             difficulty, max_num = select_difficulty()
             score, qcount = start_practice(max_num)
@@ -129,6 +137,9 @@ def main():
         elif choice == '3':
             show_previous_scores()
         elif choice == '4':
+            change_name()
+        elif choice == '5':
+            name = load_or_create_name()
             print(f'Exiting the program. Goodbye {name}!')
             running = False
         else:

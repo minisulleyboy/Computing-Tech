@@ -143,7 +143,7 @@ def main():
             print(f'Exiting the program. Goodbye {name}!')
             running = False
         else:
-            print('Invalid choice. Please enter a number between 1 and 4.')
+            print('Invalid choice. Please enter a number between 1 and 5.')
         if running:
             showmenu()
 
